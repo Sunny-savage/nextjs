@@ -17,9 +17,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid token" }, { status: 400 });
     }
     console.log(user);
-    sendEmail({ email, emailType: "RESET", userId: user._id });
+    const mail = sendEmail({ email, emailType: "RESET", userId: user._id });
 
-    return NextResponse.json({ message: "successfully mailes", success: true });
+    return NextResponse.json({
+      message: "successfully mailes , mail sent bhai bc",
+      success: true,
+      data: mail,
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
